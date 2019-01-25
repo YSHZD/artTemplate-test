@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<script id="nametmpl" type="text/html">
+    <h1>
+        {{name}} 2019
+    </h1>
+   <div>{{#html}}</div>
+   <p>{{if add == 'YSH'}}YSH{{else}}not YSH{{/if}}</p>
+   {{if arr.length>0}}
+        {{each arr}}
+            <h3>{{$index+1}}---{{$value}}</h3>
+        {{/each}}
+   {{/if}}
+   {{each objs}}
+        {{if $index == 'contact'}}
+            {{each $value}}
+                <p>{{$index}}---{{$value}}</p>
+            {{/each}}
+        {{/if}}
+    {{/each}}
+</script>
+
+<body>
+    <div id="name"></div>
+</body>
+<script src="template-web.js"></script>
+<script>
+    function add(str) {
+        return 'ysh' + str;
+    }
+    var data = {
+        name: add('YSH'),
+        arr: ['a', 'b', 'c'],
+        objs: {
+            "name": "Jake",
+            "age": 31,
+            "interests": ["basketball", "hockey", "photography"],
+            "contact": {
+                "email": "jake@xyz.com",
+                "phone": "999999999"
+            }
+        },
+        arr2: [58, 60, 80, 90, 50],
+        "html": "<div style='background: #f00; height: 30px; line-height: 30px;'>html元素</div>"
+    };
+    var nameIn = template('nametmpl',data);
+    document.getElementById("name").innerHTML = nameIn;
+</script>
+
+</html>
